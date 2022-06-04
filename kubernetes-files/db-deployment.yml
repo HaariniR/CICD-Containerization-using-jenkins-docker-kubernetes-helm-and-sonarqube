@@ -10,31 +10,30 @@ spec:
       app: "vprodb"
   replicas: 1
   template:
-    spec:
        metadata:
          labels:
            app: "vprodb"
-       containers:
-          - name: vprodb
-            image: haarubabe/mysql:V2
-            args:
-             - "--ignore-db-dir=lost+found"
-            ports:
+       spec:
+         containers:
+           - name: vprodb
+             image: haarubabe/mysql:V2
+             args:
+              - "--ignore-db-dir=lost+found"
+             ports:
               - containerPort: 3306
-            env:
+             env:
               - name: MYSQL_ROOT_PASSWORD
                 valueFrom:
-                   secretkeyRef:
-                      name: secret
-                      key: MYSQL_PASS
-            volumeMounts:
+                  secretKeyRef:
+                     name: secret
+                     key: MYSQL_PASS
+             volumeMounts:
               - mountPath: /var/lib/mysql
                 name: vprodbvol
-       nodeSelector:
-         zone: us-east-1a
-       volumes:
-          - name: vprodbvol
-            awsElasticBlockStore:
-               volumeID: "vol-06cc2b7112de6002d"
-               fsType: ext4
-
+         nodeSelector:
+            zone: us-east-1a
+         volumes:
+           - name: vprodbvol
+             awsElasticBlockStore:
+                volumeID: "vol-06cc2b7112de6002d"
+                fsType: ext4
