@@ -24,6 +24,6 @@ spec:
               value: guest
             - name: RABBITMQ_DEFAULT_PASS
               valueFrom:
-                secretkeyRef:
+                secretKeyRef:
                    name: secret
                    key: RABBIT_PASS
