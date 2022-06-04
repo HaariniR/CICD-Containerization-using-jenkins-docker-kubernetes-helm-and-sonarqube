@@ -1,2 +1,40 @@
 version: "2.0"
 services:
+     vprodb:
+        image: haarubabe/mysql:V1
+        ports:
+          - 3306:3306
+        volumes:
+          - vprodb:/var/lib/mysql
+        environment:
+          - MYSQL_ROOT_PASSWORD="vprodbpass"
+          - MYSQL_DATABASE="accounts"
+
+     vprocache01:
+        image: memcached
+        ports:
+          - 11211:11211
+
+     vpromq01:
+        image: rabbitmq
+        ports:
+         - 15672:15672
+        enviroment:
+          - RABBITMQ_DEFAULT_USER="guest"
+          - RABBITMQ_DEFAULT_PASS="guest"
+
+     vproapp:
+       image: haarubabe/tomcat:V1
+       ports:
+         - 8080:8080
+       volumes:
+         - vproappdb:/usr/local/tomcat/webapps
+
+     vproweb:
+       image: haarubabe/nginx:V1
+       ports:
+         - 80:80
+
+volumes:
+    - vproappdb: {}
+    - vprodb: {}
