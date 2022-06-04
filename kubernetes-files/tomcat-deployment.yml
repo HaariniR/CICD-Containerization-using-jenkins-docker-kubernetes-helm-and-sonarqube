@@ -10,16 +10,16 @@ spec:
       app: "vproapp"
   replicas: 1
   template:
-    spec:
-       metadata:
-         labels:
-           app: "vproapp"
-       containers:
+      metadata:
+        labels:
+          app: "vproapp"
+      spec:
+        containers:
           - name: vproapp
             image: haarubabe/tomcat:V2
             ports:
               - containerPort: 8080
-       initContainers:
+        initContainers:
           - name: init-db
             image: busybox
             command: ["sh","-c","until nslookup vprodb; do sleep 2; done;"]

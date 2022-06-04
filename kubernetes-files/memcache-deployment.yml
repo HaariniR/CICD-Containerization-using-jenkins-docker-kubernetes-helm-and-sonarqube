@@ -10,13 +10,13 @@ spec:
       app: "vprocache01"
   replicas: 1
   template:
-    spec:
        metadata:
          labels:
            app: "vprocache01"
-       containers:
-          - name: vprocache1
-            image: memcached
-            ports:
-              - name: vpromc-port
-                containerPort: 11211
+       spec:
+         containers:
+           - name: vprocache1
+             image: memcached
+             ports:
+               - name: vpromc-port
+                 containerPort: 11211
