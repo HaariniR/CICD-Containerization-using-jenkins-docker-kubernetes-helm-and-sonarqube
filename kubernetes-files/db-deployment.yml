@@ -3,17 +3,17 @@ kind: Deployment
 metadata:
   name: "db-deployment"
   labels:
-    app: "db01"
+    app: "vprodb"
 spec:
   selector:
     matchLabels:
-      app: "db01"
+      app: "vprodb"
   replicas: 1
   template:
     spec:
        metadata:
          labels:
-           app: "db01"
+           app: "vprodb"
        containers:
           - name: vprodb
             image: haarubabe/mysql:V2
