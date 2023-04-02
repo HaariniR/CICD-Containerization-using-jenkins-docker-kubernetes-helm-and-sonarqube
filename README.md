@@ -8,7 +8,7 @@ Jenkins server
 
 Sonarqube server
 
-Backend instances server - RabbitMQ, ElasticCache, Memcached.
+Backend instances server - RabbitMQ, ElasticCache, Memcached are created as docker images.
 
 Kubernetes server - created using KOPS
 
@@ -24,13 +24,15 @@ Step3:
 Code analysis and quality gates checking using sonarqube.
 
 Step4: 
-Next build the tomcat docker image.
+Next build the tomcat docker image using the artifact that is built in step 1
 
 Step5: 
-Create kubernetes cluster on the slave node using KOPS.
+Using KOPS create a kubernetes cluster. Configure jenkins to be used with KOPS as a slave node.
 
-Step 6: Create helm charts using the kubernetes files(deployment,service files) and perform helm install.
-All services will get deployed on the clusters created.
+Step 6: In slave node, install helm and create helm charts using the kubernetes files(deployment,service files)
+All services will get deployed on the clusters created when helm install job is executed.
+
+Everytime the kubernetes cluster will be deployed with the dynamically built docker image using the latest artifact
 
 ![image](https://user-images.githubusercontent.com/102613218/229348109-2726e73f-35bb-4469-965b-c1fb17e457e4.png)
 
